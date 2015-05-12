@@ -1,6 +1,6 @@
 {
   "name": "diacriticless",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Module to remove all diacritics from a text.",
   "main": "diacriticless.js",
   "scripts": {
