@@ -1,0 +1,24 @@
+{
+  "name": "diacriticless",
+  "version": "1.0.0",
+  "description": "Module to remove all diacritics from a text.",
+  "main": "diacriticless.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g-pb/diacriticless.git"
+  },
+  "keywords": [
+    "diacritic",
+    "accent",
+    "string"
+  ],
+  "author": "Guilherme A. Peron Borges",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/g-pb/diacriticless/issues"
+  },
+  "homepage": "https://github.com/g-pb/diacriticless"
+}
