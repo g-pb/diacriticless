@@ -79,37 +79,36 @@ var diacritics =
 		'z' : ['z','ź','ż','ž','ƶ','ȥ','ɀ','ʐ','ʑ','ᙆ','ᙇ','ᶻ','ᶼ','ᶽ','ẑ','ẓ','ẕ','ⱬ','ｚ'],
 		'Z' : ['Z','Ź','Ż','Ž','Ƶ','Ȥ','ᴢ','ᵶ','Ẑ','Ẓ','Ẕ','Ⱬ','Ｚ']
 	};
+// Precompiled Object with { key = Diacritic, value = real-Character }
+var compiledDiactitics = {};
+
+// Precompile the Object, iterate the diacritics-Object
+for (var key in diacritics) {
+  ok = diacritics[key];
+
+  for (var rval in ok) {
+    var val = ok[rval];
+
+    // Do not replace the char with itself
+    if (val !== key) {
+      compiledDiactitics[val] = key;
+    }
+  }
+}
 
 /*
  * Main function of the module which removes all diacritics from the received text
  */
 module.exports = function (text) {
-    var result = [];
+  var result = "";
 
-	// iterate over all the characters of the received text
-    for(var i=0; i<text.length; i++) {
-        var searchChar = text.charAt(i);
-        var foundChar = false;
+  // iterate over all the characters of the received text
+  for (var i = 0; i < text.length; i++) {
+    var searchChar = text.charAt(i);
 
-		// iterate over all the diacritics
-        for(var key in diacritics) {
-            var indexChar = diacritics[key].indexOf(searchChar);
-			
-			// check if the current character is a diacritic
-            if (indexChar !== -1) {
-				// as the character is a diacritic, adds into the result array, the key of the found diacritic
-                result.push(key);
-                foundChar = true;
-                break;
-            }
-        }
+    // If applicable replace the diacritic character with the real one or use the original value
+    result += searchChar in compiledDiactitics ? compiledDiactitics[searchChar] : searchChar;
+  }
 
-        // check if the character was not found
-        if (!foundChar) {
-			// as the character was not found, returns it
-            result.push(searchChar);
-        }
-    }
-
-    return result.join("");
+  return result;
 };
